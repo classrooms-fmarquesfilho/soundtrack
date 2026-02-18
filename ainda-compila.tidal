@@ -1,8 +1,17 @@
-setcps (70/60/4)
+-- ============================================================
+-- ainda-compila.tidal
+-- BPM: 70
+-- Licenca: CC BY-SA 4.0
+-- ============================================================
 
 hush
+setcps (70/60/4)
 
--- Bass: supersaw grave, quase inaudivel, so ancora
+-- Para parar tudo: hush
+
+
+-- SECAO A - TEXTURAS 
+
 d8 $ slow 8
   $ n "c1 ~ ~ ~ g0 ~ ~ ~"
   # s "supersaw"
@@ -11,7 +20,6 @@ d8 $ slow 8
   # room 0.6 # size 0.95
   # attack 1.2 # release 6.0
 
--- Pad principal: bem mais reverberado, ataque lento
 d6 $ slow 2
   $ n "c4 ~ e4 ~ g4 ~ d4 ~"
   # s "superpiano"
@@ -20,7 +28,6 @@ d6 $ slow 2
   # attack 0.8 # release 4.0
   # lpf 3500
 
--- Pad secundario: harmonico mais alto, quase imperceptivel
 d7 $ slow 6
   $ n "g5 ~ b5 ~ e5 ~"
   # s "superpiano"
@@ -29,24 +36,58 @@ d7 $ slow 6
   # lpf 2000
   # attack 1.5 # release 6.0
 
--- Bumbo Teardrop: sem ataque, muito decay, afogado em reverb
--- gain baixo, lpf fecha bastante o transiente
+
+-- SECAO B - RITMO
+
 d1 $ s "bd:5"
-  # gain 0.55
+  # gain 0.78
   # lpf 180
   # room 0.78 # size 0.85
   # attack 0.05 # release 1.8
   # pan 0.48
 
--- Sem snare. Hi-hat fantasma: quase inaudivel, so textura
 d3 $ s "hh ~ ~ hh ~ ~ hh ~"
   # gain 0.33
   # lpf 4000
   # room 0.6 # size 0.8
   # pan (slow 11 sine)
 
--- Glitch 1: fragmento do pad aparece ocasionalmente
--- a cada 12 ciclos, fatia o pad em pedacos
+
+-- SECAO C - LO-FI HIP HOP
+
+d11 $ slow 1
+  $ s "noise"
+  # gain (range 0.08 0.14 rand)
+  # lpf (range 800 2400 rand)
+  # room 0.3 # size 0.4
+  # pan (slow 9 sine)
+
+d12 $ swing 0.6
+  $ s "[[hh ~] hh] [[hh ~] [~ hh]]"
+  # gain (range 0.18 0.28 rand)
+  # speed (range 0.9 1.1 rand)
+  # lpf 3200
+  # room 0.25 # size 0.35
+  # pan (range 0.4 0.6 rand)
+
+d13 $ s "bd:3 ~ ~ ~ ~ ~ bd:3 ~"
+  # gain 0.42
+  # lpf 280
+  # room 0.2 # size 0.3
+  # speed 0.85
+  # crush 4
+
+d14 $ every 6 id
+  $ s "~ ~ ~ ~ sn:4 ~ ~ ~"
+  # gain 0.22
+  # lpf 1200
+  # room 0.45 # size 0.6
+  # speed 0.9
+  # crush 6
+
+
+-- SECAO D - GLITCHES
+
 d9 $ every 12 (striate 8)
   $ slow 4 $ n "e4 g4"
   # s "superpiano"
@@ -54,11 +95,19 @@ d9 $ every 12 (striate 8)
   # room 0.88 # size 0.97
   # lpf 2500
 
--- Glitch 2: click/crackle muito discreto e aleatorio
--- "rand" no gain faz aparecer e sumir imprevisivelmente
 d10 $ slow 3
   $ s "~ ~ ~ cp:2 ~ ~ ~ ~"
   # gain (range 0.0 0.28 rand)
   # room 0.92 # size 0.99
   # lpf 800
   # pan (slow 5 sine)
+
+
+-- ORDEM DE ENTRADA:
+-- d8 -> d6 -> d7 -> d1 -> d3 -> d11 -> d12 -> d13 -> d14 -> d9 -> d10
+--
+-- SAIDA GRADUAL:
+-- silence d9, d10, d14, d13, d12, d11, d1, d3
+-- deixar d6, d7, d8 desaparecerem com o reverb
+--
+-- hush <- para tudo instantaneamente
