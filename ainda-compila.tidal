@@ -108,6 +108,14 @@ d15 $ every 8 (striate 4)
   # room 0.7 # size 0.9
   # pan (slow 7 sine)
 
-
--- ORDEM: d8->d6->d7->d1->d3->d11->d12->d13->d14->d9->d10->d15
--- SAIDA: silence d15,d10,d9,d14,d13,d12,d11,d1,d3 -> deixar d6,d7,d8 morrer
+-- desliga individuais
+silence d15
+silence d10
+silence d9
+silence d14
+silence d13
+silence d12
+silence d11
+silence d1
+silence d3
+-- por ultimo, deixar d6 d7 d8 morrerem sozinhos no reverb
