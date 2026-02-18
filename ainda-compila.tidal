@@ -1,16 +1,14 @@
 -- ============================================================
 -- ainda-compila.tidal
--- BPM: 70
--- Licenca: CC BY-SA 4.0
+-- BPM: 70 | Licenca: CC BY-SA 4.0
 -- ============================================================
 
-hush
 setcps (70/60/4)
 
--- Para parar tudo: hush
+hush 
 
 
--- SECAO A - TEXTURAS 
+-- SECAO A - TEXTURAS AMBIENT
 
 d8 $ slow 8
   $ n "c1 ~ ~ ~ g0 ~ ~ ~"
@@ -46,40 +44,41 @@ d1 $ s "bd:5"
   # attack 0.05 # release 1.8
   # pan 0.48
 
-d3 $ s "hh ~ ~ hh ~ ~ hh ~"
-  # gain 0.33
-  # lpf 4000
+d3 $ s "linnhats ~ ~ linnhats ~ ~ linnhats ~"
+  # gain 0.6
+  # lpf 3500
   # room 0.6 # size 0.8
+  # speed 0.9
   # pan (slow 11 sine)
 
 
 -- SECAO C - LO-FI HIP HOP
 
 d11 $ slow 1
-  $ s "noise"
-  # gain (range 0.08 0.14 rand)
+  $ s "pebbles"
+  # gain (range 0.2 0.4 rand)
   # lpf (range 800 2400 rand)
   # room 0.3 # size 0.4
   # pan (slow 9 sine)
 
 d12 $ swing 0.6
-  $ s "[[hh ~] hh] [[hh ~] [~ hh]]"
-  # gain (range 0.18 0.28 rand)
+  $ s "[[linnhats ~] linnhats] [[linnhats ~] [~ linnhats]]"
+  # gain (range 0.4 0.6 rand)
   # speed (range 0.9 1.1 rand)
-  # lpf 3200
+  # lpf 3000
   # room 0.25 # size 0.35
   # pan (range 0.4 0.6 rand)
 
-d13 $ s "bd:3 ~ ~ ~ ~ ~ bd:3 ~"
-  # gain 0.42
+d13 $ s "bd ~ ~ ~ ~ ~ bd ~"
+  # gain 0.40
   # lpf 280
   # room 0.2 # size 0.3
   # speed 0.85
   # crush 4
 
 d14 $ every 6 id
-  $ s "~ ~ ~ ~ sn:4 ~ ~ ~"
-  # gain 0.22
+  $ s "~ ~ ~ ~ gretsch ~ ~ ~"
+  # gain 0.4
   # lpf 1200
   # room 0.45 # size 0.6
   # speed 0.9
@@ -91,23 +90,24 @@ d14 $ every 6 id
 d9 $ every 12 (striate 8)
   $ slow 4 $ n "e4 g4"
   # s "superpiano"
-  # gain 0.32
+  # gain 0.42
   # room 0.88 # size 0.97
   # lpf 2500
 
 d10 $ slow 3
-  $ s "~ ~ ~ cp:2 ~ ~ ~ ~"
-  # gain (range 0.0 0.28 rand)
+  $ s "~ ~ ~ cp ~ ~ ~ ~"
+  # gain (range 0.0 0.45 rand)
   # room 0.92 # size 0.99
   # lpf 800
   # pan (slow 5 sine)
 
+d15 $ every 8 (striate 4)
+  $ slow 2 $ s "glitch"
+  # gain (range 0.10 0.30 rand)
+  # lpf (range 600 2000 rand)
+  # room 0.7 # size 0.9
+  # pan (slow 7 sine)
 
--- ORDEM DE ENTRADA:
--- d8 -> d6 -> d7 -> d1 -> d3 -> d11 -> d12 -> d13 -> d14 -> d9 -> d10
---
--- SAIDA GRADUAL:
--- silence d9, d10, d14, d13, d12, d11, d1, d3
--- deixar d6, d7, d8 desaparecerem com o reverb
---
--- hush <- para tudo instantaneamente
+
+-- ORDEM: d8->d6->d7->d1->d3->d11->d12->d13->d14->d9->d10->d15
+-- SAIDA: silence d15,d10,d9,d14,d13,d12,d11,d1,d3 -> deixar d6,d7,d8 morrer
