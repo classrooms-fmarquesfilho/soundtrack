@@ -1,0 +1,64 @@
+setcps (70/60/4)
+
+hush
+
+-- Bass: supersaw grave, quase inaudivel, so ancora
+d8 $ slow 8
+  $ n "c1 ~ ~ ~ g0 ~ ~ ~"
+  # s "supersaw"
+  # gain 0.62
+  # lpf 120
+  # room 0.6 # size 0.95
+  # attack 1.2 # release 6.0
+
+-- Pad principal: bem mais reverberado, ataque lento
+d6 $ slow 2
+  $ n "c4 ~ e4 ~ g4 ~ d4 ~"
+  # s "superpiano"
+  # gain 0.62
+  # room 0.95 # size 0.99
+  # attack 0.8 # release 4.0
+  # lpf 3500
+
+-- Pad secundario: harmonico mais alto, quase imperceptivel
+d7 $ slow 6
+  $ n "g5 ~ b5 ~ e5 ~"
+  # s "superpiano"
+  # gain 0.22
+  # room 0.99 # size 0.99
+  # lpf 2000
+  # attack 1.5 # release 6.0
+
+-- Bumbo Teardrop: sem ataque, muito decay, afogado em reverb
+-- gain baixo, lpf fecha bastante o transiente
+d1 $ s "bd:5"
+  # gain 0.55
+  # lpf 180
+  # room 0.78 # size 0.85
+  # attack 0.05 # release 1.8
+  # pan 0.48
+
+-- Sem snare. Hi-hat fantasma: quase inaudivel, so textura
+d3 $ s "hh ~ ~ hh ~ ~ hh ~"
+  # gain 0.33
+  # lpf 4000
+  # room 0.6 # size 0.8
+  # pan (slow 11 sine)
+
+-- Glitch 1: fragmento do pad aparece ocasionalmente
+-- a cada 12 ciclos, fatia o pad em pedacos
+d9 $ every 12 (striate 8)
+  $ slow 4 $ n "e4 g4"
+  # s "superpiano"
+  # gain 0.32
+  # room 0.88 # size 0.97
+  # lpf 2500
+
+-- Glitch 2: click/crackle muito discreto e aleatorio
+-- "rand" no gain faz aparecer e sumir imprevisivelmente
+d10 $ slow 3
+  $ s "~ ~ ~ cp:2 ~ ~ ~ ~"
+  # gain (range 0.0 0.28 rand)
+  # room 0.92 # size 0.99
+  # lpf 800
+  # pan (slow 5 sine)
